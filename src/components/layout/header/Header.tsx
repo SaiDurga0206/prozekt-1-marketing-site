@@ -108,7 +108,7 @@ export function Header(): JSX.Element {
                 fontSize: resolveSize(theme.typographyTokens.subHeadingFontSize, 'large'),
                 letterSpacing: '0.005em',
                 textTransform: 'lowercase',
-                display: { xs: 'none', sm: 'inline' },
+                display: 'inline',
               }}
             >
               prozekt-1
