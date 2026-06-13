@@ -107,11 +107,11 @@ export function Header(): JSX.Element {
                 fontWeight: 600,
                 fontSize: resolveSize(theme.typographyTokens.subHeadingFontSize, 'large'),
                 letterSpacing: '0.005em',
-                textTransform: 'lowercase',
+                textTransform: 'none',
                 display: 'inline',
               }}
             >
-              prozekt-1
+              PROZEKT-1
             </Typography>
           </Button>
 
