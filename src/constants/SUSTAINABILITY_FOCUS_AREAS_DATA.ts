@@ -27,7 +27,7 @@ export const SUSTAINABILITY_FOCUS_AREAS: SustainabilityFocusArea[] = [
   },
   {
     id: 'ethical-animal-management',
-    title: 'Ethical Animal Management',
+    title: 'Animal Welfare Management',
     imageSrc:
       'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1400&q=80',
     imageAlt: 'Animals in a managed outdoor care environment',
