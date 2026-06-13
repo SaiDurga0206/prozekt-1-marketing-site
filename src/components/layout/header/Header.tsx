@@ -156,7 +156,7 @@ export function Header(): JSX.Element {
           paper: {
             sx: {
               width: DRAWER_WIDTH,
-              backgroundColor: 'background.default',
+              backgroundColor: '#000000',
               borderLeft: '1px solid',
               borderColor: 'brandSteel',
             },
@@ -185,7 +185,7 @@ export function Header(): JSX.Element {
           <IconButton
             onClick={closeDrawer}
             aria-label="Close navigation menu"
-            sx={{ color: 'text.primary', p: 0.75 }}
+            sx={{ color: '#FFFFFF', p: 0.75 }}
           >
             <CloseIcon />
           </IconButton>
@@ -205,7 +205,7 @@ export function Header(): JSX.Element {
                   fontFamily: theme.typographyTokens.fontFamily,
                   fontSize: theme.typographyTokens.navFontSize.large,
                   letterSpacing: '0.12em',
-                  color: 'text.primary',
+                  color: '#FFFFFF',
                   textTransform: 'uppercase',
                   '&:hover': {
                     backgroundColor: 'transparent',
@@ -232,7 +232,7 @@ export function Header(): JSX.Element {
             sx={{
               ...navButtonSx,
               fontSize: theme.typographyTokens.navFontSize.small,
-              color: 'text.secondary',
+              color: 'rgba(255,255,255,0.55)',
             }}
           >
             ABOUT PROZEKT-1
