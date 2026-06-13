@@ -3,6 +3,7 @@ import { alpha, type Theme } from '@mui/material/styles'
 import { useState, type JSX } from 'react'
 import { Link } from 'react-router-dom'
 
+import mobileBackground from '@/assets/Home/mobilebackground.jpeg'
 import { DIVISION_DATA } from '@/constants/DIVISION_DATA'
 import { DIVISIONS_INTRO_PARAGRAPHS } from '@/constants/DIVISIONS_COPY'
 import { OPERATIONAL_AREAS } from '@/constants/OPERATIONAL_AREAS_DATA'
@@ -54,56 +55,67 @@ export function MarketingShowcase(): JSX.Element {
           flexDirection: 'column',
           minHeight: '100svh',
           backgroundColor: '#000000',
-          px: 3,
-          pt: 6,
-          pb: 6,
           fontFamily: ARIAL,
         }}
       >
-        {/* Eyebrow */}
-        <Typography
+        {/* Image hero — top to just above buttons */}
+        <Box
           sx={{
-            color: GOLD,
-            fontFamily: ARIAL,
-            fontWeight: 400,
-            fontSize: '0.6875rem',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            mb: 2.5,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%), url(${mobileBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+            px: 3,
+            pt: 7,
+            pb: 4,
           }}
         >
-          {activeVariant.eyebrow}
-        </Typography>
+          {/* Eyebrow */}
+          <Typography
+            sx={{
+              color: GOLD,
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.6875rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              mb: 2.5,
+            }}
+          >
+            {activeVariant.eyebrow}
+          </Typography>
 
-        {/* Headline */}
-        <Typography
-          component="h1"
-          sx={{
-            color: '#FFFFFF',
-            fontFamily: ARIAL,
-            fontWeight: 400,
-            fontSize: '1.75rem',
-            lineHeight: 1.2,
-            letterSpacing: '-0.01em',
-            mb: 2,
-          }}
-        >
-          {activeVariant.headline}
-        </Typography>
+          {/* Headline */}
+          <Typography
+            component="h1"
+            sx={{
+              color: '#FFFFFF',
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '1.75rem',
+              lineHeight: 1.2,
+              letterSpacing: '-0.01em',
+              mb: 2,
+            }}
+          >
+            {activeVariant.headline}
+          </Typography>
 
-        {/* Subheadline */}
-        <Typography
-          sx={{
-            color: 'rgba(255,255,255,0.55)',
-            fontFamily: ARIAL,
-            fontWeight: 400,
-            fontSize: '0.8125rem',
-            lineHeight: 1.7,
-            mb: 4,
-          }}
-        >
-          {activeVariant.subheadline}
-        </Typography>
+          {/* Subheadline */}
+          <Typography
+            sx={{
+              color: 'rgba(255,255,255,0.75)',
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.8125rem',
+              lineHeight: 1.7,
+            }}
+          >
+            {activeVariant.subheadline}
+          </Typography>
+        </Box>
+
+        {/* Black content area — buttons and everything below */}
+        <Box sx={{ px: 3, pt: 3.5, pb: 6, flex: 1 }}>
 
         {/* CTA Buttons */}
         <Stack direction="row" spacing={1.5} sx={{ mb: 5, flexWrap: 'wrap', gap: 1.5 }}>
@@ -345,6 +357,7 @@ export function MarketingShowcase(): JSX.Element {
             </Box>
           ))}
         </Box>
+        </Box>{/* end black content area */}
       </Box>
 
       {/* ── DESKTOP / LAPTOP VIEW (md and above) ───────────────────── */}
