@@ -45,7 +45,7 @@ function CloseIcon(): JSX.Element {
 const navButtonSx = {
   border: 'none',
   minWidth: 0,
-  color: '#000000',
+  color: BRAND_COLORS.DEEP_GRAPHITE,
   fontFamily: theme.typographyTokens.fontFamily,
   letterSpacing: '0.12em',
   fontSize: theme.typographyTokens.navFontSize.large,
@@ -102,7 +102,7 @@ export function Header(): JSX.Element {
               variant="h6"
               component="span"
               sx={{
-                color: '#000000',
+                color: BRAND_COLORS.DEEP_GRAPHITE,
                 fontFamily: theme.typographyTokens.displayFontFamily,
                 fontWeight: 600,
                 fontSize: resolveSize(theme.typographyTokens.subHeadingFontSize, 'large'),
@@ -137,7 +137,7 @@ export function Header(): JSX.Element {
             aria-label="Open navigation menu"
             sx={{
               display: { xs: 'flex', md: 'none' },
-              color: '#000000',
+              color: BRAND_COLORS.DEEP_GRAPHITE,
               p: 1,
             }}
           >

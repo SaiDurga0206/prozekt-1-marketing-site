@@ -1,4 +1,5 @@
 import { Box, Chip, Divider, Stack, Typography } from '@mui/material'
+import { alpha } from '@mui/material/styles'
 import type { JSX } from 'react'
 
 import prozektLogo from '@/assets/prozekt1_logo_hd.png'
@@ -58,7 +59,7 @@ export function AboutPage(): JSX.Element {
           pb: { xs: 6, md: 8 },
           px: { xs: 3, md: 6 },
           background: PAGE_HERO_GRADIENT,
-          borderBottom: `1px solid ${BRAND_COLORS.STEEL}22`,
+          borderBottom: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.13)}`,
         }}
       >
         <Box
@@ -90,9 +91,9 @@ export function AboutPage(): JSX.Element {
             label="Companies Act, 2013"
             size="small"
             sx={{
-              backgroundColor: `${BRAND_COLORS.SAGE_GREEN}18`,
+              backgroundColor: alpha(BRAND_COLORS.SAGE_GREEN, 0.09),
               color: BRAND_COLORS.SAGE_GREEN,
-              border: `1px solid ${BRAND_COLORS.SAGE_GREEN}44`,
+              border: `1px solid ${alpha(BRAND_COLORS.SAGE_GREEN, 0.27)}`,
               height: 26,
             }}
           />
@@ -100,9 +101,9 @@ export function AboutPage(): JSX.Element {
             label="MSME Registered"
             size="small"
             sx={{
-              backgroundColor: `${BRAND_COLORS.SOFT_GOLD}18`,
+              backgroundColor: alpha(BRAND_COLORS.SOFT_GOLD, 0.09),
               color: BRAND_COLORS.SOFT_GOLD,
-              border: `1px solid ${BRAND_COLORS.SOFT_GOLD}44`,
+              border: `1px solid ${alpha(BRAND_COLORS.SOFT_GOLD, 0.27)}`,
               height: 26,
             }}
           />
@@ -110,9 +111,9 @@ export function AboutPage(): JSX.Element {
             label="Andhra Pradesh"
             size="small"
             sx={{
-              backgroundColor: `${BRAND_COLORS.STEEL}18`,
+              backgroundColor: alpha(BRAND_COLORS.STEEL, 0.09),
               color: BRAND_COLORS.DEEP_GRAPHITE,
-              border: `1px solid ${BRAND_COLORS.STEEL}44`,
+              border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.27)}`,
               height: 26,
             }}
           />
@@ -174,7 +175,7 @@ export function AboutPage(): JSX.Element {
             </Stack>
           </Box>
 
-          <Divider sx={{ borderColor: `${BRAND_COLORS.STEEL}44` }} />
+          <Divider sx={{ borderColor: alpha(BRAND_COLORS.STEEL, 0.27) }} />
 
           {/* Registration Credentials */}
           <Box>
@@ -194,12 +195,12 @@ export function AboutPage(): JSX.Element {
                   key={cred.label}
                   sx={{
                     p: 2.5,
-                    border: `1px solid ${BRAND_COLORS.STEEL}33`,
+                    border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.20)}`,
                     borderRadius: 1,
-                    background: `${BRAND_COLORS.BONE_WHITE}88`,
+                    background: alpha(BRAND_COLORS.BONE_WHITE, 0.53),
                     transition: 'border-color 0.2s ease, background 0.2s ease',
                     '&:hover': {
-                      borderColor: `${BRAND_COLORS.SOFT_GOLD}66`,
+                      borderColor: alpha(BRAND_COLORS.SOFT_GOLD, 0.40),
                       background: BRAND_COLORS.BONE_WHITE,
                     },
                   }}
@@ -218,7 +219,7 @@ export function AboutPage(): JSX.Element {
             </Box>
           </Box>
 
-          <Divider sx={{ borderColor: `${BRAND_COLORS.STEEL}44` }} />
+          <Divider sx={{ borderColor: alpha(BRAND_COLORS.STEEL, 0.27) }} />
 
           {/* Registered Address */}
           <Box sx={{ pb: { xs: 2, md: 4 } }}>

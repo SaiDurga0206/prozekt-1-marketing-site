@@ -17,6 +17,9 @@ import type { LandingVariant } from '@/types/landing.types'
 
 type HeroDetailPanel = 'gallery' | 'explore-divisions' | 'operational-areas'
 
+const ARIAL = 'Arial, "Helvetica Neue", sans-serif'
+const GOLD = '#B39A63'
+
 const heroCardStyles = {
   border: '1px solid',
   borderColor: (theme: Theme) => alpha(theme.palette.brandBone, 0.55),
@@ -27,6 +30,12 @@ const heroCardStyles = {
   width: '100%',
 }
 
+const divisionRoutes: Record<string, string> = {
+  organics: ROUTES.ORGANICS,
+  'ethical-systems': ROUTES.SUSTAINABILITY,
+  recycling: ROUTES.RECYCLING,
+}
+
 export function MarketingShowcase(): JSX.Element {
   const [activePanel, setActivePanel] = useState<HeroDetailPanel>('explore-divisions')
   const activeVariant =
@@ -34,18 +43,315 @@ export function MarketingShowcase(): JSX.Element {
     LANDING_VARIANTS[0]
 
   const divisionCards = DIVISION_DATA.slice(0, 3)
-  const divisionRoutes: Record<string, string> = {
-    organics: ROUTES.ORGANICS,
-    'ethical-systems': ROUTES.SUSTAINABILITY,
-    recycling: ROUTES.RECYCLING,
-  }
 
   return (
     <Box id="marketing-showcase" component="section">
-      <Stack spacing={2.5}>
+
+      {/* ── MOBILE VIEW (xs / sm only) ─────────────────────────────── */}
+      <Box
+        sx={{
+          display: { xs: 'flex', md: 'none' },
+          flexDirection: 'column',
+          minHeight: '100svh',
+          backgroundColor: '#000000',
+          px: 3,
+          pt: 6,
+          pb: 6,
+          fontFamily: ARIAL,
+        }}
+      >
+        {/* Eyebrow */}
+        <Typography
+          sx={{
+            color: GOLD,
+            fontFamily: ARIAL,
+            fontWeight: 400,
+            fontSize: '0.6875rem',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            mb: 2.5,
+          }}
+        >
+          {activeVariant.eyebrow}
+        </Typography>
+
+        {/* Headline */}
+        <Typography
+          component="h1"
+          sx={{
+            color: '#FFFFFF',
+            fontFamily: ARIAL,
+            fontWeight: 400,
+            fontSize: '1.75rem',
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
+            mb: 2,
+          }}
+        >
+          {activeVariant.headline}
+        </Typography>
+
+        {/* Subheadline */}
+        <Typography
+          sx={{
+            color: 'rgba(255,255,255,0.55)',
+            fontFamily: ARIAL,
+            fontWeight: 400,
+            fontSize: '0.8125rem',
+            lineHeight: 1.7,
+            mb: 4,
+          }}
+        >
+          {activeVariant.subheadline}
+        </Typography>
+
+        {/* CTA Buttons */}
+        <Stack direction="row" spacing={1.5} sx={{ mb: 5, flexWrap: 'wrap', gap: 1.5 }}>
+          <Button
+            variant="outlined"
+            onClick={() =>
+              document.getElementById('mobile-divisions')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+            sx={{
+              borderColor: '#FFFFFF',
+              color: '#FFFFFF',
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.6875rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              borderRadius: 0,
+              px: 2.5,
+              py: 1,
+              '&:hover': { borderColor: GOLD, color: GOLD, backgroundColor: 'transparent' },
+            }}
+          >
+            {activeVariant.primaryCta}
+          </Button>
+          <Button
+            variant="text"
+            onClick={() =>
+              document.getElementById('mobile-operational-areas')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+            sx={{
+              color: GOLD,
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.6875rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              px: 1,
+              '&:hover': { color: '#FFFFFF', backgroundColor: 'transparent' },
+            }}
+          >
+            {activeVariant.secondaryCta}
+          </Button>
+        </Stack>
+
+        {/* Divisions list */}
+        <Box id="mobile-divisions" sx={{ borderTop: '1px solid rgba(255,255,255,0.1)', pt: 3 }}>
+          <Typography
+            sx={{
+              color: 'rgba(255,255,255,0.3)',
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.6rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              mb: 2,
+            }}
+          >
+            Our Divisions
+          </Typography>
+
+          {divisionCards.map((division) => {
+            const destination = divisionRoutes[division.id]
+            const rowSx = {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              py: 2.25,
+              borderBottom: '1px solid rgba(255,255,255,0.07)',
+              textDecoration: 'none',
+            }
+            const inner = (
+              <>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: GOLD,
+                      fontFamily: ARIAL,
+                      fontWeight: 400,
+                      fontSize: '0.5625rem',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      mb: 0.5,
+                    }}
+                  >
+                    {division.num}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: '#FFFFFF',
+                      fontFamily: ARIAL,
+                      fontWeight: 400,
+                      fontSize: '0.875rem',
+                      letterSpacing: '0.01em',
+                      lineHeight: 1.35,
+                    }}
+                  >
+                    {division.title}
+                  </Typography>
+                </Box>
+                <Typography
+                  sx={{
+                    color: 'rgba(255,255,255,0.3)',
+                    fontFamily: ARIAL,
+                    fontWeight: 400,
+                    fontSize: '1rem',
+                    ml: 2,
+                    flexShrink: 0,
+                  }}
+                >
+                  →
+                </Typography>
+              </>
+            )
+
+            return destination ? (
+              <Box
+                key={division.id}
+                component={Link}
+                to={destination}
+                sx={{
+                  ...rowSx,
+                  '&:hover .mob-title': { color: GOLD },
+                  '&:hover .mob-arrow': { color: GOLD },
+                }}
+              >
+                {inner}
+              </Box>
+            ) : (
+              <Box key={division.id} sx={rowSx}>
+                {inner}
+              </Box>
+            )
+          })}
+        </Box>
+
+        {/* Stats */}
         <Box
           sx={{
-            minHeight: { xs: 'auto', sm: 'auto', md: '88vh' },
+            mt: 5,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 2,
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            pt: 4,
+          }}
+        >
+          {activeVariant.stats.map((stat) => (
+            <Box key={stat.id}>
+              <Typography
+                sx={{
+                  color: '#FFFFFF',
+                  fontFamily: ARIAL,
+                  fontWeight: 400,
+                  fontSize: '1.375rem',
+                  lineHeight: 1,
+                  mb: 0.75,
+                }}
+              >
+                {stat.value}
+              </Typography>
+              <Typography
+                sx={{
+                  color: 'rgba(255,255,255,0.3)',
+                  fontFamily: ARIAL,
+                  fontWeight: 400,
+                  fontSize: '0.5rem',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  lineHeight: 1.5,
+                }}
+              >
+                {stat.label}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Operational Areas */}
+        <Box id="mobile-operational-areas" sx={{ mt: 6, borderTop: '1px solid rgba(255,255,255,0.1)', pt: 3 }}>
+          <Typography
+            sx={{
+              color: 'rgba(255,255,255,0.3)',
+              fontFamily: ARIAL,
+              fontWeight: 400,
+              fontSize: '0.6rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              mb: 2,
+            }}
+          >
+            Operational Areas
+          </Typography>
+
+          {OPERATIONAL_AREAS.map((area, index) => (
+            <Box
+              key={area.id}
+              sx={{
+                py: 2.25,
+                borderBottom: '1px solid rgba(255,255,255,0.07)',
+              }}
+            >
+              <Typography
+                sx={{
+                  color: GOLD,
+                  fontFamily: ARIAL,
+                  fontWeight: 400,
+                  fontSize: '0.5625rem',
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  mb: 0.5,
+                }}
+              >
+                {String(index + 1).padStart(2, '0')}
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#FFFFFF',
+                  fontFamily: ARIAL,
+                  fontWeight: 400,
+                  fontSize: '0.875rem',
+                  letterSpacing: '0.01em',
+                  lineHeight: 1.35,
+                  mb: 0.75,
+                }}
+              >
+                {area.title}
+              </Typography>
+              <Typography
+                sx={{
+                  color: 'rgba(255,255,255,0.45)',
+                  fontFamily: ARIAL,
+                  fontWeight: 400,
+                  fontSize: '0.75rem',
+                  lineHeight: 1.65,
+                }}
+              >
+                {area.description}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* ── DESKTOP / LAPTOP VIEW (md and above) ───────────────────── */}
+      <Stack spacing={2.5} sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <Box
+          sx={{
+            minHeight: '88vh',
             backgroundImage: (theme) =>
               `linear-gradient(90deg, ${alpha(theme.palette.brandGraphite, 0.84)} 0%, ${alpha(
                 theme.palette.brandGraphite,
@@ -53,13 +359,13 @@ export function MarketingShowcase(): JSX.Element {
               )} 45%, ${alpha(theme.palette.brandGraphite, 0.2)} 100%), url("${activeVariant.heroImageUrl}")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            p: { xs: 2.5, sm: 3.5, md: 5, lg: 6 },
+            p: { md: 5, lg: 6 },
             display: 'flex',
             alignItems: 'stretch',
           }}
         >
           <Grid container spacing={3} sx={{ width: '100%', flex: 1, alignItems: 'stretch', minHeight: 0 }}>
-            <Grid size={{ xs: 12, md: 7.5 }} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Grid size={{ md: 7.5 }} sx={{ display: 'flex', alignItems: 'center' }}>
               <Stack spacing={1.5} sx={{ maxWidth: 760 }}>
                 <Typography
                   variant={resolveHeadingVariant(PAGE_HEADING_SIZE)}
@@ -82,11 +388,7 @@ export function MarketingShowcase(): JSX.Element {
                         current === 'explore-divisions' ? 'gallery' : 'explore-divisions',
                       )
                     }
-                    sx={
-                      activePanel === 'explore-divisions'
-                        ? { boxShadow: 'none' }
-                        : undefined
-                    }
+                    sx={activePanel === 'explore-divisions' ? { boxShadow: 'none' } : undefined}
                   >
                     {activeVariant.primaryCta}
                   </Button>
@@ -114,10 +416,10 @@ export function MarketingShowcase(): JSX.Element {
 
             <Grid
               id="projects-gallery"
-              size={{ xs: 12, md: 4.5 }}
+              size={{ md: 4.5 }}
               sx={{
                 display: 'flex',
-                alignItems: { xs: 'flex-start', md: 'flex-end' },
+                alignItems: 'flex-end',
                 height: '100%',
                 minHeight: 0,
               }}
@@ -128,11 +430,9 @@ export function MarketingShowcase(): JSX.Element {
                   display: 'grid',
                   gridTemplateColumns: '1fr',
                   gap: 1.5,
-                  // xs/sm: no height cap — let content flow and page scroll naturally
-                  // md+: cap the panel so it sits alongside the hero text column
-                  maxHeight: { md: '72vh' },
-                  overflowY: { md: activePanel === 'operational-areas' ? 'auto' : 'hidden' },
-                  pr: { md: 0.5 },
+                  maxHeight: '72vh',
+                  overflowY: activePanel === 'operational-areas' ? 'auto' : 'hidden',
+                  pr: 0.5,
                   ...(activePanel === 'operational-areas'
                     ? {
                         overscrollBehavior: 'contain',
@@ -150,7 +450,7 @@ export function MarketingShowcase(): JSX.Element {
                 }}
               >
                 {activePanel === 'explore-divisions' && (
-                  <Box sx={{ ...heroCardStyles, minHeight: { xs: 150, md: 160 }, background: 'none', boxShadow: 'none', padding: 0, border: 'none' }}>
+                  <Box sx={{ ...heroCardStyles, minHeight: 160, background: 'none', boxShadow: 'none', padding: 0, border: 'none' }}>
                     <Stack spacing={1.25}>
                       {DIVISIONS_INTRO_PARAGRAPHS.map((paragraph) => (
                         <Typography
@@ -167,7 +467,7 @@ export function MarketingShowcase(): JSX.Element {
 
                 {activePanel === 'operational-areas' &&
                   OPERATIONAL_AREAS.map((area, index) => (
-                    <Box key={area.id} sx={{ ...heroCardStyles, minHeight: { xs: 150, md: 160 } }}>
+                    <Box key={area.id} sx={{ ...heroCardStyles, minHeight: 160 }}>
                       <Typography variant="overline" sx={{ color: 'brandGold' }}>
                         OPERATIONAL AREA {String(index + 1).padStart(2, '0')}
                       </Typography>
@@ -189,8 +489,6 @@ export function MarketingShowcase(): JSX.Element {
                 {activePanel === 'gallery' &&
                   divisionCards.map((division) => {
                     const destination = divisionRoutes[division.id]
-                    const isClickable = Boolean(destination)
-
                     const cardContent = (
                       <>
                         <Typography
@@ -208,31 +506,27 @@ export function MarketingShowcase(): JSX.Element {
                       </>
                     )
 
-                    if (isClickable) {
-                      return (
-                        <Box
-                          key={division.id}
-                          component={Link}
-                          to={destination}
-                          sx={{
-                            ...heroCardStyles,
-                            minHeight: { xs: 150, md: 160 },
-                            textDecoration: 'none',
-                            cursor: 'pointer',
-                            transition: 'transform 140ms ease, background-color 140ms ease',
-                            '&:hover': {
-                              transform: 'translateY(-2px)',
-                              backgroundColor: (theme: Theme) => alpha(theme.palette.brandGraphite, 0.6),
-                            },
-                          }}
-                        >
-                          {cardContent}
-                        </Box>
-                      )
-                    }
-
-                    return (
-                      <Box key={division.id} sx={{ ...heroCardStyles, minHeight: { xs: 150, md: 160 } }}>
+                    return destination ? (
+                      <Box
+                        key={division.id}
+                        component={Link}
+                        to={destination}
+                        sx={{
+                          ...heroCardStyles,
+                          minHeight: 160,
+                          textDecoration: 'none',
+                          cursor: 'pointer',
+                          transition: 'transform 140ms ease, background-color 140ms ease',
+                          '&:hover': {
+                            transform: 'translateY(-2px)',
+                            backgroundColor: (theme: Theme) => alpha(theme.palette.brandGraphite, 0.6),
+                          },
+                        }}
+                      >
+                        {cardContent}
+                      </Box>
+                    ) : (
+                      <Box key={division.id} sx={{ ...heroCardStyles, minHeight: 160 }}>
                         {cardContent}
                       </Box>
                     )
@@ -242,6 +536,7 @@ export function MarketingShowcase(): JSX.Element {
           </Grid>
         </Box>
       </Stack>
+
     </Box>
   )
 }
