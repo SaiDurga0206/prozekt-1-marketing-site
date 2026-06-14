@@ -18,7 +18,7 @@ export const DIVISION_DATA: DivisionData[] = [
   {
     id: 'recycling',
     num: '03',
-    title: 'RECYCLING & REPURPOSING',
+    title: 'PROZEKT-1 RECYCLING & REPURPOSING',
     description:
       'Waste management, recycling, and material reutilization systems that transform discarded materials into reusable, functional, and sustainable products.',
   },
