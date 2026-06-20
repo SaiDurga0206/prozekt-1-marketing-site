@@ -9,6 +9,7 @@ export const ROUTES = {
   MICROGREENS: '/organics/microgreens',
   HYDRO_AERO: '/organics/hydro-aeroponics',
   FUNCTIONAL_FOODS: '/organics/functional-foods',
+  CONTACT: '/contact',
 } as const
 
 export const HOME_HASH = {

@@ -2,12 +2,13 @@ import type { JSX } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { Header } from '@/components/layout/header'
-import { AboutPage } from '@/pages/AboutPage'
-import { HomePage } from '@/pages/HomePage'
+import { AboutPage } from '@/pages/About/AboutPage'
+import { HomePage } from '@/pages/Home/HomePage'
 import { LaunchingSoonPage } from '@/pages/LaunchingSoonPage'
-import { MushroomsPage } from '@/pages/MushroomsPage'
-import { OrganicsPage } from '@/pages/OrganicsPage'
-import { PoultryPage } from '@/pages/PoultryPage'
+import { MushroomsPage } from '@/pages/Customer Facing Area/MushroomsPage'
+import { OrganicsPage } from '@/pages/Customer Facing Area/OrganicsPage'
+import { PoultryPage } from '@/pages/Customer Facing Area/PoultryPage'
+import { ContactPage } from '@/pages/ContactPage'
 import { RecyclingPage } from '@/pages/RecyclingPage'
 import { SustainabilityPage } from '@/pages/SustainabilityPage'
 import { ROUTES } from '@/routes'
@@ -27,6 +28,7 @@ function App(): JSX.Element {
         <Route path={ROUTES.MICROGREENS} element={<LaunchingSoonPage title="Microgreens" />} />
         <Route path={ROUTES.HYDRO_AERO} element={<LaunchingSoonPage title="Hydro / Aeroponics" />} />
         <Route path={ROUTES.FUNCTIONAL_FOODS} element={<LaunchingSoonPage title="Functional Foods" />} />
+        <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>
     </>
