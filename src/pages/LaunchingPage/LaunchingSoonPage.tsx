@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material'
-import { alpha } from '@mui/material/styles'
 import type { JSX } from 'react'
 
 import { PageWrapper } from '@/components/layout/page-wrapper'
