@@ -61,4 +61,10 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <url>
+    <loc>https://prozekt-1.org/contact</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
