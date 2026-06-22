@@ -1,24 +1,6 @@
 import { ORGANICS_IMAGES } from '@/assets/organics'
 import { ROUTES } from '@/routes'
-
-export interface OrganicsAreaSubsection {
-  label?: string
-  imageSrc: string
-  imageAlt: string
-  description: string
-  
-}
-
-export interface OrganicsArea {
-  id: string
-  name: string
-  imageSrc?: string
-  imageAlt?: string
-  description?: string
-  subsections?: OrganicsAreaSubsection[]
-  detailLinkLabel?: string
-  
-}
+import type { OrganicsArea } from '@/types'
 
 export const ORGANICS_AREAS: OrganicsArea[] = [
   {

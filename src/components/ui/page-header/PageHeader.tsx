@@ -4,7 +4,7 @@ import type { JSX, ReactNode } from 'react'
 
 import { PAGE_HEADING_SIZE, PAGE_TEXT_SIZE } from '@/theme/theme'
 import { resolveHeadingVariant, resolveSize, resolveTextVariant } from '@/theme/tokens'
-import type { ComponentSize } from '@/types/ui.types'
+import type { ComponentSize } from '@/types'
 
 interface PageHeaderProps {
   overline: string

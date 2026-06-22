@@ -8,7 +8,7 @@ import { BRAND_COLORS } from '@/constants/BRAND_COLORS'
 import { ROUTES } from '@/routes'
 import theme from '@/theme/theme'
 import { resolveSize } from '@/theme/tokens'
-import type { NavItem } from '@/types/brand.types'
+import type { NavItem } from '@/types'
 
 const DRAWER_WIDTH = 260
 
@@ -124,6 +124,7 @@ export function Header(): JSX.Element {
                 to={item.to}
                 variant="text"
                 disableRipple
+                startIcon={item.Icon ? <item.Icon sx={{ fontSize: '16px !important' }} /> : undefined}
                 sx={navButtonSx}
               >
                 {item.label}
@@ -207,12 +208,16 @@ export function Header(): JSX.Element {
                   letterSpacing: '0.12em',
                   color: '#FFFFFF',
                   textTransform: 'uppercase',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5,
                   '&:hover': {
                     backgroundColor: 'transparent',
                     color: 'brandGold',
                   },
                 }}
               >
+                {item.Icon && <item.Icon sx={{ fontSize: 20, flexShrink: 0 }} />}
                 {item.label}
               </ListItemButton>
             </ListItem>

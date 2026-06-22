@@ -3,9 +3,9 @@ import { alpha } from '@mui/material/styles'
 import type { JSX } from 'react'
 
 import prozektLogo from '@/assets/prozekt1_logo_hd.png'
-import { PageWrapper } from '@/components/layout/page-wrapper'
-import { BackToHome } from '@/components/ui/back-link'
-import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants/BRAND_COLORS'
+import { PageWrapper } from '@/components/layout'
+import { BackToHome } from '@/components/ui'
+import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants'
 
 const credentials = [
   {
@@ -128,7 +128,7 @@ export function AboutPage(): JSX.Element {
               About the Company
             </Typography>
             <Typography variant="h3" sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, mb: 3 }}>
-              Rooted in Purpose, Recognised by the Nation
+              Registered in Andhra Pradesh. Built for Responsible Food and Sustainability Systems.
             </Typography>
 
             <Stack spacing={2.5}>
@@ -136,8 +136,8 @@ export function AboutPage(): JSX.Element {
                 Prozekt-1 Organics Private Limited was incorporated on{' '}
                 <Box component="strong">15 March 2026</Box>{' '}
                 under the{' '}
-                <Box component="strong">Companies Act, 2013 (18 of 2013)</Box>
-                , duly registered by the Central Registration Centre of the{' '}
+                <Box component="strong">Companies Act, 2013</Box>
+                , and is registered with the{' '}
                 <Box component="strong">Ministry of Corporate Affairs, Government of India</Box>
                 . The company is incorporated as a Company Limited by Shares, with its registered office in
                 the State of Andhra Pradesh, carrying Corporate Identity Number{' '}
@@ -145,32 +145,40 @@ export function AboutPage(): JSX.Element {
               </Typography>
 
               <Typography variant="body1" sx={{ color: BRAND_COLORS.DEEP_GRAPHITE }}>
-                The company was founded to advance India's organic food ecosystem — engaged in the{' '}
-                <Box component="strong">growing of cereals, the processing and preserving of fruit and vegetables</Box>
-                , and the wholesale of food products. Operating from West Godavari, Andhra Pradesh,
-                Prozekt-1 Organics combines modern agri-technology with India's farming heritage to deliver
-                responsibly sourced, high-quality organic produce.
+                Prozekt-1 is being developed as a long-term ecosystem focused on{' '}
+                <Box component="strong">responsible food production, sustainable cultivation, waste-conscious operations, and future-ready agricultural systems</Box>
+                . The group's vision is to build practical ventures across organic food production,
+                controlled-environment farming, value-added food products, sustainability systems, and
+                recycling-based solutions.
               </Typography>
 
               <Typography variant="body1" sx={{ color: BRAND_COLORS.DEEP_GRAPHITE }}>
-                Recognised by the{' '}
+                The first operating division under this vision is{' '}
+                <Box component="strong">Prozekt-1 Organics</Box>
+                , based in West Godavari, Andhra Pradesh. The company is currently focused on{' '}
+                <Box component="strong">mushroom cultivation, microgreens, hydroponic and aeroponic growing systems, free-range poultry, and functional food products</Box>
+                . Its work combines farm-level production, product development, packaging, and local market distribution.
+              </Typography>
+
+              <Typography variant="body1" sx={{ color: BRAND_COLORS.DEEP_GRAPHITE }}>
+                Prozekt-1 Organics is registered under the{' '}
                 <Box component="strong">
                   Ministry of Micro, Small and Medium Enterprises (MSME), Government of India
                 </Box>
-                , Prozekt-1 Organics holds Udyam Registration Number{' '}
+                , with Udyam Registration Number{' '}
                 <Box component="strong">UDYAM-AP-12-0114480</Box>
                 , classified as a{' '}
-                <Box component="strong">Micro Enterprise in the Manufacturing sector</Box>{' '}
-                (effective 26 March 2026). This recognition places the company under the full protection and
-                support of India's MSME framework — ensuring regulatory compliance, structured growth, and
-                accountability at every stage of operations.
+                <Box component="strong">Micro Enterprise in the Manufacturing sector</Box>
+                , effective 26 March 2026. This registration supports the company's formal growth as a
+                structured small enterprise under India's MSME framework.
               </Typography>
 
               <Typography variant="body1" sx={{ color: BRAND_COLORS.DEEP_GRAPHITE }}>
-                Prozekt-1 is built on the conviction that premium organics, advanced cultivation techniques —
-                spanning microgreens, hydroponics, aeroponics, and functional foods — and sustainable practices
-                are not competing interests but a single, unified mission. Every product carries the weight of
-                legal standing, institutional trust, and a commitment to the communities it serves.
+                The wider Prozekt-1 vision is to create a practical bridge between food, farming, sustainability,
+                and responsible enterprise. While Prozekt-1 Organics is the first active step, the long-term
+                direction includes{' '}
+                <Box component="strong">sustainability systems, recycling and repurposing initiatives, agro-based production models, and consumer-facing organic experiences</Box>{' '}
+                that bring people closer to nature, food, and science.
               </Typography>
             </Stack>
           </Box>

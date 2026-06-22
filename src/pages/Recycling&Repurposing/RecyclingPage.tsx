@@ -1,22 +1,24 @@
-import { Box, Chip, Stack, Typography } from '@mui/material'
-import { alpha, useTheme } from '@mui/material/styles'
+import { Box, Stack, Typography } from '@mui/material'
 import type { JSX } from 'react'
 
-import { PageWrapper } from '@/components/layout/page-wrapper'
-import { BackToHome } from '@/components/ui/back-link'
-import { ContentCard } from '@/components/ui/content-card'
-import { ContentSection } from '@/components/ui/content-section'
-import { ContentStack } from '@/components/ui/content-stack'
-import { PageContainer } from '@/components/ui/page-container'
-import { PageHeader } from '@/components/ui/page-header'
-import { PageNavChip, PageNavChipRow } from '@/components/ui/page-nav-chip'
-import { RECYCLING_FOCUS_AREAS } from '@/constants/RECYCLING_FOCUS_AREAS_DATA'
-import { useScrollToHash, scrollToSection } from '@/hooks/useScrollToHash'
-import { PAGE_SUBHEADING_SIZE, PAGE_TEXT_SIZE } from '@/theme/theme'
-import { resolveSize, resolveSubHeadingVariant, resolveTextVariant } from '@/theme/tokens'
+import { PageWrapper } from '@/components/layout'
+import {
+  BackToHome,
+  ContentSection,
+  ContentStack,
+  GoalCard,
+  PageContainer,
+  PageHeader,
+  PageNavChip,
+  PageNavChipRow,
+  UnderDevelopmentChip,
+} from '@/components/ui'
+import { RECYCLING_FOCUS_AREAS } from '@/constants'
+import { useScrollToHash, scrollToSection } from '@/hooks'
+import { PAGE_SUBHEADING_SIZE } from '@/theme/theme'
+import { resolveSubHeadingVariant } from '@/theme/tokens'
 
 export function RecyclingPage(): JSX.Element {
-  const theme = useTheme()
   useScrollToHash()
 
   return (
@@ -30,19 +32,7 @@ export function RecyclingPage(): JSX.Element {
           description="Prozekt-1 Recycling & Repurposing is focused on developing waste recovery, material reuse, and resource reintegration systems aimed at reducing landfill dependency and extending the useful life of materials through practical recycling and repurposing applications."
         >
           <Stack spacing={2}>
-            <Chip
-              label="Under Development"
-              sx={{
-                alignSelf: 'flex-start',
-                border: '1px solid',
-                borderColor: 'brandGold',
-                bgcolor: (theme) => alpha(theme.palette.brandGold, 0.16),
-                color: 'brandGraphite',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-              }}
-            />
+            <UnderDevelopmentChip />
             <PageNavChipRow size="medium">
               {RECYCLING_FOCUS_AREAS.map((area) => (
                 <PageNavChip
@@ -56,28 +46,10 @@ export function RecyclingPage(): JSX.Element {
         </PageHeader>
 
         <Box sx={{ my: { xs: 4, md: 5 } }}>
-          <ContentCard size="medium">
-            <Typography variant="overline" sx={{ color: 'brandGold', letterSpacing: '0.14em' }}>
-              Our Goal
-            </Typography>
-            <Typography
-              variant={resolveSubHeadingVariant(PAGE_SUBHEADING_SIZE)}
-              sx={{ mt: 1, color: 'brandGraphite' }}
-            >
-              Recover, repurpose, and reintegrate useful resources.
-            </Typography>
-            <Typography
-              variant={resolveTextVariant(PAGE_TEXT_SIZE)}
-              sx={{
-                mt: 2,
-                color: 'text.primary',
-                maxWidth: resolveSize(theme.layout.proseMaxWidth, 'medium'),
-              }}
-            >
-              To create practical pathways for recovering, repurposing, and reintegrating resources that would
-              otherwise become waste, supporting more efficient and sustainable material use.
-            </Typography>
-          </ContentCard>
+          <GoalCard
+            heading="Recover, repurpose, and reintegrate useful resources."
+            body="To create practical pathways for recovering, repurposing, and reintegrating resources that would otherwise become waste, supporting more efficient and sustainable material use."
+          />
         </Box>
 
         <Typography

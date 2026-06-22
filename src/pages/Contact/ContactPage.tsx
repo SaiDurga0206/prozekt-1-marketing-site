@@ -6,9 +6,9 @@ import PhoneIcon from '@mui/icons-material/Phone'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import type { JSX } from 'react'
 
-import { PageWrapper } from '@/components/layout/page-wrapper'
-import { BackToHome } from '@/components/ui/back-link'
-import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants/BRAND_COLORS'
+import { PageWrapper } from '@/components/layout'
+import { BackToHome } from '@/components/ui'
+import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants'
 
 const WHATSAPP_CHANNEL = 'https://whatsapp.com/channel/0029Vb7ZrHSBFLgcRRI8xk3m'
 const INSTAGRAM_URL = 'https://www.instagram.com/prozekt1_organics?igsh=MTNmMTBwcnIyMWdvaQ=='

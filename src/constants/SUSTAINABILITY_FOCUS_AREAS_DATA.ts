@@ -1,10 +1,4 @@
-export interface SustainabilityFocusArea {
-  id: string
-  title: string
-  imageSrc: string
-  imageAlt: string
-  description: string
-}
+import type { SustainabilityFocusArea } from '@/types'
 
 export const SUSTAINABILITY_FOCUS_AREAS: SustainabilityFocusArea[] = [
   {

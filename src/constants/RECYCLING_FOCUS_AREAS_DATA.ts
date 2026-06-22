@@ -1,10 +1,4 @@
-export interface RecyclingFocusArea {
-  id: string
-  title: string
-  imageSrc: string
-  imageAlt: string
-  description: string
-}
+import type { RecyclingFocusArea } from '@/types'
 
 export const RECYCLING_FOCUS_AREAS: RecyclingFocusArea[] = [
   {

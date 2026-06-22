@@ -7,7 +7,7 @@ import { ContentImage } from '@/components/ui/content-image'
 import { DetailLink } from '@/components/ui/detail-link'
 import { PAGE_SUBHEADING_SIZE, PAGE_TEXT_SIZE } from '@/theme/theme'
 import { resolveSize, resolveSubHeadingVariant, resolveTextVariant } from '@/theme/tokens'
-import type { ComponentSize } from '@/types/ui.types'
+import type { ComponentSize } from '@/types'
 
 interface ContentSectionSubsection {
   label?: string

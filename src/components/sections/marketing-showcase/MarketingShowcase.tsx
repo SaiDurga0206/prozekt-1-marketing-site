@@ -14,7 +14,7 @@ import {
 import { ROUTES } from '@/routes'
 import { PAGE_HEADING_SIZE, PAGE_SUBHEADING_SIZE, PAGE_TEXT_SIZE } from '@/theme/theme'
 import { resolveHeadingVariant, resolveSubHeadingVariant, resolveTextVariant } from '@/theme/tokens'
-import type { LandingVariant } from '@/types/landing.types'
+import type { LandingVariant } from '@/types'
 
 type HeroDetailPanel = 'gallery' | 'explore-divisions' | 'operational-areas'
 

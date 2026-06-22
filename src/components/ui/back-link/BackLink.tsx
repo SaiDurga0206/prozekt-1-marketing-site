@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { PAGE_TEXT_SIZE } from '@/theme/theme'
 import { resolveSize } from '@/theme/tokens'
-import type { ComponentSize } from '@/types/ui.types'
+import type { ComponentSize } from '@/types'
 
 interface BackLinkProps {
   to: string

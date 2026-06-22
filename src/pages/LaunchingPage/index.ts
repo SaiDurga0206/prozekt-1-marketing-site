@@ -1,0 +1,1 @@
+export { LaunchingSoonPage } from './LaunchingSoonPage'

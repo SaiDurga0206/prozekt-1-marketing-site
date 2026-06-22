@@ -1,8 +1,4 @@
-export interface OperationalArea {
-  id: string
-  title: string
-  description: string
-}
+import type { OperationalArea } from '@/types'
 
 export const OPERATIONAL_AREAS: OperationalArea[] = [
   {

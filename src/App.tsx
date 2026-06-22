@@ -1,16 +1,15 @@
 import type { JSX } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { Header } from '@/components/layout/header'
-import { AboutPage } from '@/pages/About/AboutPage'
-import { HomePage } from '@/pages/Home/HomePage'
-import { LaunchingSoonPage } from '@/pages/LaunchingPage/LaunchingSoonPage'
-import { MushroomsPage } from '@/pages/Organics PVT LTD/Customer Facing Area/MushroomsPage'
-import { OrganicsPage } from '@/pages/Organics PVT LTD/OrganicsPage'
-import { PoultryPage } from '@/pages/Organics PVT LTD/Customer Facing Area/PoultryPage'
-import { ContactPage } from '@/pages/Contact/ContactPage'
-import { RecyclingPage } from '@/pages/Recycling&Repurposing/RecyclingPage'
-import { SustainabilityPage } from '@/pages/Sustainability Systems/SustainabilityPage'
+import { Header } from '@/components/layout'
+import { AboutPage } from '@/pages/About'
+import { ContactPage } from '@/pages/Contact'
+import { HomePage } from '@/pages/Home'
+import { LaunchingSoonPage } from '@/pages/LaunchingPage'
+import { OrganicsPage, MushroomsPage, PoultryPage } from '@/pages/Organics PVT LTD'
+import { RecipeBookPage, PinkOyster65Page } from '@/pages/RecipeBook'
+import { RecyclingPage } from '@/pages/Recycling&Repurposing'
+import { SustainabilityPage } from '@/pages/Sustainability Systems'
 import { ROUTES } from '@/routes'
 
 function App(): JSX.Element {
@@ -28,6 +27,8 @@ function App(): JSX.Element {
         <Route path={ROUTES.MICROGREENS} element={<LaunchingSoonPage title="Microgreens" />} />
         <Route path={ROUTES.HYDRO_AERO} element={<LaunchingSoonPage title="Hydro / Aeroponics" />} />
         <Route path={ROUTES.FUNCTIONAL_FOODS} element={<LaunchingSoonPage title="Functional Foods" />} />
+        <Route path={ROUTES.RECIPE_BOOK} element={<RecipeBookPage />} />
+        <Route path={ROUTES.PINK_OYSTER_65} element={<PinkOyster65Page />} />
         <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>

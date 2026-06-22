@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
 import type { JSX } from 'react'
 
-import { PageWrapper } from '@/components/layout/page-wrapper'
-import { BackToOrganics } from '@/components/ui/back-link'
-import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants/BRAND_COLORS'
+import { PageWrapper } from '@/components/layout'
+import { BackToOrganics } from '@/components/ui'
+import { BRAND_COLORS, PAGE_HERO_GRADIENT } from '@/constants'
 import { typographyTokens } from '@/theme/typography'
 
 interface LaunchingSoonPageProps {

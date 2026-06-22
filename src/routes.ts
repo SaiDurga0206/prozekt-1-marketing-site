@@ -10,12 +10,12 @@ export const ROUTES = {
   HYDRO_AERO: '/organics/hydro-aeroponics',
   FUNCTIONAL_FOODS: '/organics/functional-foods',
   CONTACT: '/contact',
+  RECIPE_BOOK: '/recipe-book',
+  PINK_OYSTER_65: '/recipe-book/pink-oyster-65',
 } as const
 
 export const HOME_HASH = {
   TOP: 'top',
-  MARKETING_SHOWCASE: 'marketing-showcase',
-  PROJECTS_GALLERY: 'projects-gallery',
 } as const
 
 export function routeWithHash(route: string, hash: string): string {

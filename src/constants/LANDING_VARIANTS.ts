@@ -1,5 +1,5 @@
 import mushroomsHero from '@/assets/Home/prozekt1_background_art.svg'
-import type { LandingVariant } from '@/types/landing.types'
+import type { LandingVariant } from '@/types'
 
 export const LANDING_SECTION_LABEL = 'HUMAN IMPACT LANDING LAYOUT'
 export const SELECTED_LANDING_VARIANT_ID = 'human-impact'

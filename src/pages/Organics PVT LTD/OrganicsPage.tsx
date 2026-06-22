@@ -1,15 +1,18 @@
 import type { JSX } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { PageWrapper } from '@/components/layout/page-wrapper'
-import { BackToHome } from '@/components/ui/back-link'
-import { ContentSection } from '@/components/ui/content-section'
-import { ContentStack } from '@/components/ui/content-stack'
-import { PageContainer } from '@/components/ui/page-container'
-import { PageHeader } from '@/components/ui/page-header'
-import { PageNavChip, PageNavChipRow } from '@/components/ui/page-nav-chip'
-import { ORGANICS_AREA_ROUTES, ORGANICS_AREAS } from '@/constants/ORGANICS_AREAS_DATA'
-import { useScrollToHash, scrollToSection } from '@/hooks/useScrollToHash'
+import { PageWrapper } from '@/components/layout'
+import {
+  BackToHome,
+  ContentSection,
+  ContentStack,
+  PageContainer,
+  PageHeader,
+  PageNavChip,
+  PageNavChipRow,
+} from '@/components/ui'
+import { ORGANICS_AREA_ROUTES, ORGANICS_AREAS } from '@/constants'
+import { useScrollToHash, scrollToSection } from '@/hooks'
 
 
 export function OrganicsPage(): JSX.Element {

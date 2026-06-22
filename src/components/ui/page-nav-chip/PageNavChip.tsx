@@ -4,7 +4,7 @@ import type { JSX, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 import { resolveSize } from '@/theme/tokens'
-import type { ComponentSize } from '@/types/ui.types'
+import type { ComponentSize } from '@/types'
 
 interface PageNavChipProps {
   label: string

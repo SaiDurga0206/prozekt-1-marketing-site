@@ -1,4 +1,4 @@
-import type { DivisionData } from '@/types/division.types'
+import type { DivisionData } from '@/types'
 
 export const DIVISION_DATA: DivisionData[] = [
   {

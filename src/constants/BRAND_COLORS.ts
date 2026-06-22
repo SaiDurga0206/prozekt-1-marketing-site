@@ -7,6 +7,9 @@ export const BRAND_COLORS = {
   WARM_WHITE: '#F7F5F0',
   ECO_TINT: '#EEF0EC',
   LIGHT_BROWN: '#F5E6D0',
+  PAPER_WHITE: '#FDFAF6',
 } as const
 
 export const PAGE_HERO_GRADIENT = `linear-gradient(160deg, ${BRAND_COLORS.WARM_WHITE} 0%, ${BRAND_COLORS.BONE_WHITE} 60%, ${BRAND_COLORS.ECO_TINT} 100%)`
+
+export const RECIPE_BOOK_FONT = '"Porte Bon Heur", cursive'

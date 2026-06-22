@@ -1,12 +1,5 @@
 import { POULTRY_IMAGES } from '@/assets/poultry'
-
-export interface PoultryVariety {
-  id: string
-  name: string
-  imageSrc: string
-  imageAlt: string
-  description: string
-}
+import type { PoultryVariety } from '@/types'
 
 export const POULTRY_VARIETIES: PoultryVariety[] = [
   {

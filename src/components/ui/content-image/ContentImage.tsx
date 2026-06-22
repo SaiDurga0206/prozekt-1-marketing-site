@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles'
 import type { JSX } from 'react'
 
 import { resolveSize } from '@/theme/tokens'
-import type { ComponentSize } from '@/types/ui.types'
+import type { ComponentSize } from '@/types'
 
 interface ContentImageProps {
   src: string

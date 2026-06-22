@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Porte Bon Heur';
+  src: url('/fonts/PorteBonHeur.woff2') format('woff2'),
+       url('/fonts/PorteBonHeur.ttf') format('truetype'),
+       url('/fonts/PorteBonHeur.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

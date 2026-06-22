@@ -1,12 +1,5 @@
 import { MUSHROOM_IMAGES } from '@/assets/mushrooms'
-
-export interface MushroomVariety {
-  id: string
-  name: string
-  imageSrc: string
-  imageAlt: string
-  description: string
-}
+import type { MushroomVariety } from '@/types'
 
 export const MUSHROOM_VARIETIES: MushroomVariety[] = [
   {
