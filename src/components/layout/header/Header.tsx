@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, Toolbar, Typography } from '@mui/material'
-import { useState, type JSX } from 'react'
+import { useEffect, useState, type JSX } from 'react'
 import { Link } from 'react-router-dom'
 
 import prozektLogo from '@/assets/prozekt1_logo_hd.png'
@@ -61,6 +61,11 @@ export function Header(): JSX.Element {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const closeDrawer = () => setDrawerOpen(false)
+
+  useEffect(() => {
+    document.body.style.overflow = drawerOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [drawerOpen])
 
   return (
     <>

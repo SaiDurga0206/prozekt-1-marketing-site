@@ -103,7 +103,6 @@ export function RecipeBookPage(): JSX.Element {
   return (
     <PageWrapper>
       <PageContainer size="medium">
-        <Box sx={{ '& h3, & h4, & h5, & h6': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
         <BackToHome />
 
         <PageHeader
@@ -163,7 +162,7 @@ export function RecipeBookPage(): JSX.Element {
         </PageHeader>
 
         {/* Recipe grid */}
-        <Box sx={{ mt: { xs: 5, md: 6 } }}>
+        <Box sx={{ mt: { xs: 5, md: 6 }, '& .MuiTypography-root': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
           {filteredRecipes.length > 0 ? (
             <Box
               sx={{
@@ -196,7 +195,6 @@ export function RecipeBookPage(): JSX.Element {
               </Typography>
             </Box>
           )}
-        </Box>
         </Box>
       </PageContainer>
     </PageWrapper>

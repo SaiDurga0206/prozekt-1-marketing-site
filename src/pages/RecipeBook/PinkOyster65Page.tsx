@@ -136,8 +136,7 @@ export function PinkOyster65Page(): JSX.Element {
   return (
     <PageWrapper>
       <PageContainer size="medium">
-        <Box sx={{ '& h3, & h4, & h5, & h6': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
-          <BackToRecipeBook />
+        <BackToRecipeBook />
 
           <Box sx={{ mb: { xs: 4, md: 5 } }}>
             <Typography
@@ -177,6 +176,7 @@ export function PinkOyster65Page(): JSX.Element {
             </Box>
           </Box>
 
+          <Box sx={{ '& .MuiTypography-root': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
           <Box
             ref={scrollRef}
             sx={{
@@ -301,7 +301,7 @@ export function PinkOyster65Page(): JSX.Element {
               Swipe or use arrows to read
             </Typography>
           )}
-        </Box>
+          </Box>
       </PageContainer>
     </PageWrapper>
   )
