@@ -106,72 +106,32 @@ function CardContent({ card }: { card: RecipeCardData }): JSX.Element {
 }
 
 export function PinkOyster65Page(): JSX.Element {
+  const scrollRef = useRef<HTMLDivElement>(null)
   const [activeCard, setActiveCard] = useState(0)
   const totalCards = recipe.cards.length
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const activeCardRef = useRef(0)
-  activeCardRef.current = activeCard
 
   const goTo = useCallback(
-    (index: number) => setActiveCard(Math.max(0, Math.min(index, totalCards - 1))),
+    (index: number) => {
+      if (!scrollRef.current) return
+      const clamped = Math.max(0, Math.min(index, totalCards - 1))
+      scrollRef.current.scrollTo({ left: clamped * scrollRef.current.offsetWidth, behavior: 'smooth' })
+      setActiveCard(clamped)
+    },
     [totalCards],
   )
 
-  // Pointer events work for both mouse (desktop drag) and touch (mobile swipe).
-  // pointermove with passive:false lets us preventDefault on horizontal gestures
-  // before the inner overflowY:auto element claims the touch scroll.
+  const handleScroll = useCallback(() => {
+    if (!scrollRef.current) return
+    const index = Math.round(scrollRef.current.scrollLeft / scrollRef.current.offsetWidth)
+    setActiveCard(index)
+  }, [])
+
   useEffect(() => {
-    const el = carouselRef.current
+    const el = scrollRef.current
     if (!el) return
-
-    let startX = 0
-    let startY = 0
-    let dragging = false
-
-    const onDown = (e: PointerEvent) => {
-      if (e.pointerType === 'mouse' && e.button !== 0) return
-      // Only preventDefault on mouse — on touch it causes pointercancel on iOS Safari
-      if (e.pointerType === 'mouse') e.preventDefault()
-      startX = e.clientX
-      startY = e.clientY
-      dragging = true
-      el.setPointerCapture(e.pointerId)
-    }
-
-    const onMove = (e: PointerEvent) => {
-      if (!dragging) return
-      const dx = e.clientX - startX
-      const dy = e.clientY - startY
-      if (Math.abs(dx) > Math.abs(dy)) e.preventDefault()
-    }
-
-    const onUp = (e: PointerEvent) => {
-      if (!dragging) return
-      dragging = false
-      const dx = e.clientX - startX
-      if (Math.abs(dx) > 50) {
-        setActiveCard(Math.max(0, Math.min(activeCardRef.current + (dx < 0 ? 1 : -1), totalCards - 1)))
-      }
-    }
-
-    const onCancel = () => { dragging = false }
-    const onDragStart = (e: DragEvent) => e.preventDefault()
-
-    el.addEventListener('pointerdown', onDown)
-    el.addEventListener('pointermove', onMove, { passive: false })
-    el.addEventListener('pointerup', onUp)
-    el.addEventListener('pointercancel', onCancel)
-    el.addEventListener('dragstart', onDragStart)
-    return () => {
-      el.removeEventListener('pointerdown', onDown)
-      el.removeEventListener('pointermove', onMove)
-      el.removeEventListener('pointerup', onUp)
-      el.removeEventListener('pointercancel', onCancel)
-      el.removeEventListener('dragstart', onDragStart)
-    }
-  }, [totalCards])
-
-  const slidePercent = 100 / totalCards
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <PageWrapper>
@@ -217,135 +177,121 @@ export function PinkOyster65Page(): JSX.Element {
         </Box>
 
         <Box sx={{ '& .MuiTypography-root': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
-          {/* Wrapper gives arrows a positioning context outside overflow:hidden */}
-          <Box sx={{ position: 'relative' }}>
-          {/* Carousel viewport — ref used for native touch listeners */}
-          <Box ref={carouselRef} sx={{ overflow: 'hidden', borderRadius: 2, userSelect: 'none', touchAction: 'pan-y', cursor: 'grab', '&:active': { cursor: 'grabbing' } }}>
-            {/* Track: totalCards×100% wide; each card is slidePercent% = exactly 1 viewport width */}
-            <Box
-              sx={{
-                display: 'flex',
-                width: `${totalCards * 100}%`,
-                transform: `translateX(-${activeCard * slidePercent}%)`,
-                transition: 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                willChange: 'transform',
-              }}
-            >
-              {recipe.cards.map((card, i) => (
-                <Box key={card.id} sx={{ width: `${slidePercent}%`, flexShrink: 0 }}>
-                  <Box
-                    sx={{
-                      border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.18)}`,
-                      borderRadius: 2,
-                      overflow: 'hidden',
-                      bgcolor: BRAND_COLORS.PAPER_WHITE,
-                    }}
-                  >
-                    {card.imageSrc && (
-                      <Box
-                        component="img"
-                        draggable={false}
-                        src={card.imageSrc}
-                        alt={card.imageAlt ?? card.title}
+          <Box
+            ref={scrollRef}
+            sx={{
+              display: 'flex',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth',
+              '&::-webkit-scrollbar': { display: 'none' },
+              scrollbarWidth: 'none',
+              borderRadius: 2,
+            }}
+          >
+            {recipe.cards.map((card, i) => (
+              <Box key={card.id} sx={{ minWidth: '100%', scrollSnapAlign: 'start' }}>
+                <Box
+                  sx={{
+                    border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.18)}`,
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    bgcolor: BRAND_COLORS.PAPER_WHITE,
+                  }}
+                >
+                  {card.imageSrc && (
+                    <Box
+                      component="img"
+                      src={card.imageSrc}
+                      alt={card.imageAlt ?? card.title}
+                      sx={{
+                        width: '100%',
+                        height: { xs: 240, md: 320 },
+                        objectFit: 'contain',
+                        display: 'block',
+                        bgcolor: '#F5F0EA',
+                      }}
+                    />
+                  )}
+                  <Box sx={{ p: { xs: 3, md: 4 } }}>
+                    <Box sx={{ mb: 2.5 }}>
+                      <Typography
+                        variant="overline"
+                        sx={{ color: BRAND_COLORS.SOFT_GOLD, letterSpacing: '0.14em', display: 'block', mb: 0.25 }}
+                      >
+                        {String(i + 1).padStart(2, '0')} of {totalCards}
+                      </Typography>
+                      <Typography
+                        variant="h6"
                         sx={{
-                          width: '100%',
-                          height: { xs: 240, md: 320 },
-                          objectFit: 'contain',
-                          display: 'block',
-                          bgcolor: '#F5F0EA',
+                          color: BRAND_COLORS.DEEP_GRAPHITE,
+                          fontFamily: RECIPE_BOOK_FONT,
+                          fontWeight: 400,
+                          lineHeight: 1.2,
+                          fontSize: { xs: '1.5rem', md: '1.625rem' },
                         }}
-                      />
-                    )}
-                    <Box sx={{ p: { xs: 3, md: 4 } }}>
-                      <Box sx={{ mb: 2.5 }}>
-                        <Typography
-                          variant="overline"
-                          sx={{ color: BRAND_COLORS.SOFT_GOLD, letterSpacing: '0.14em', display: 'block', mb: 0.25, fontSize: '0.85rem' }}
-                        >
-                          {String(i + 1).padStart(2, '0')} of {totalCards}
-                        </Typography>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            color: BRAND_COLORS.DEEP_GRAPHITE,
-                            fontFamily: RECIPE_BOOK_FONT,
-                            fontWeight: 400,
-                            lineHeight: 1.2,
-                            fontSize: { xs: '1.5rem', md: '1.625rem' },
-                          }}
-                        >
-                          {card.title}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <CardContent card={card} />
-                      </Box>
+                      >
+                        {card.title}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        maxHeight: { xs: 280, md: 'none' },
+                        overflowY: 'auto',
+                        '&::-webkit-scrollbar': { width: 3 },
+                        '&::-webkit-scrollbar-thumb': { bgcolor: alpha(BRAND_COLORS.STEEL, 0.30), borderRadius: 4 },
+                        pr: { xs: 0.5, md: 0 },
+                      }}
+                    >
+                      <CardContent card={card} />
                     </Box>
                   </Box>
                 </Box>
+              </Box>
+            ))}
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mt: 3 }}>
+            <IconButton
+              onClick={() => goTo(activeCard - 1)}
+              disabled={activeCard === 0}
+              size="small"
+              sx={{
+                color: BRAND_COLORS.STEEL,
+                border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.25)}`,
+                '&:not(:disabled):hover': { borderColor: BRAND_COLORS.SOFT_GOLD, color: BRAND_COLORS.SOFT_GOLD },
+              }}
+            >
+              <ChevronLeftIcon fontSize="small" />
+            </IconButton>
+            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+              {recipe.cards.map((_, i) => (
+                <Box
+                  key={i}
+                  onClick={() => goTo(i)}
+                  sx={{
+                    width: activeCard === i ? 20 : 8,
+                    height: 8,
+                    borderRadius: 4,
+                    bgcolor: activeCard === i ? BRAND_COLORS.SOFT_GOLD : alpha(BRAND_COLORS.STEEL, 0.35),
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
+                  }}
+                />
               ))}
             </Box>
-          </Box>
-
-          {/* Left arrow — overlaid on image, vertically centred */}
-          <IconButton
-            onClick={() => goTo(activeCard - 1)}
-            disabled={activeCard === 0}
-            size="small"
-            sx={{
-              position: 'absolute',
-              left: { xs: '10px', md: '14px' },
-              top: { xs: '120px', md: '160px' },
-              transform: 'translateY(-50%)',
-              bgcolor: 'rgba(255,255,255,0.88)',
-              color: BRAND_COLORS.DEEP_GRAPHITE,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-              zIndex: 2,
-              '&:hover': { bgcolor: 'rgba(255,255,255,1)' },
-              '&.Mui-disabled': { visibility: 'hidden' },
-            }}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-
-          {/* Right arrow — overlaid on image, vertically centred */}
-          <IconButton
-            onClick={() => goTo(activeCard + 1)}
-            disabled={activeCard === totalCards - 1}
-            size="small"
-            sx={{
-              position: 'absolute',
-              right: { xs: '10px', md: '14px' },
-              top: { xs: '120px', md: '160px' },
-              transform: 'translateY(-50%)',
-              bgcolor: 'rgba(255,255,255,0.88)',
-              color: BRAND_COLORS.DEEP_GRAPHITE,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-              zIndex: 2,
-              '&:hover': { bgcolor: 'rgba(255,255,255,1)' },
-              '&.Mui-disabled': { visibility: 'hidden' },
-            }}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-          </Box>
-
-          {/* Dot indicators */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 3 }}>
-            {recipe.cards.map((_, i) => (
-              <Box
-                key={i}
-                onClick={() => goTo(i)}
-                sx={{
-                  width: activeCard === i ? 20 : 8,
-                  height: 8,
-                  borderRadius: 4,
-                  bgcolor: activeCard === i ? BRAND_COLORS.SOFT_GOLD : alpha(BRAND_COLORS.STEEL, 0.35),
-                  cursor: 'pointer',
-                  transition: 'all 0.25s ease',
-                }}
-              />
-            ))}
+            <IconButton
+              onClick={() => goTo(activeCard + 1)}
+              disabled={activeCard === totalCards - 1}
+              size="small"
+              sx={{
+                color: BRAND_COLORS.STEEL,
+                border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.25)}`,
+                '&:not(:disabled):hover': { borderColor: BRAND_COLORS.SOFT_GOLD, color: BRAND_COLORS.SOFT_GOLD },
+              }}
+            >
+              <ChevronRightIcon fontSize="small" />
+            </IconButton>
           </Box>
           {activeCard === 0 && (
             <Typography
