@@ -22,7 +22,7 @@ function CardContent({ card }: { card: RecipeCardData }): JSX.Element {
           <Typography
             key={i}
             variant="body2"
-            sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.0625rem' } }}
+            sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.85, fontSize: { xs: '1.125rem', md: '1.25rem' } }}
           >
             {para}
           </Typography>
@@ -38,13 +38,13 @@ function CardContent({ card }: { card: RecipeCardData }): JSX.Element {
           <Box component="li" key={i} sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <Typography
               variant="overline"
-              sx={{ color: BRAND_COLORS.SOFT_GOLD, fontWeight: 400, minWidth: 24, lineHeight: 1.6, fontSize: '0.8rem', letterSpacing: '0.06em' }}
+              sx={{ color: BRAND_COLORS.SOFT_GOLD, fontWeight: 400, minWidth: 24, lineHeight: 1.6, fontSize: '0.9rem', letterSpacing: '0.06em' }}
             >
               {String(i + 1).padStart(2, '0')}
             </Typography>
             <Typography
               variant="body2"
-              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.7, fontSize: { xs: '1rem', md: '1.0625rem' } }}
+              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.7, fontSize: { xs: '1.125rem', md: '1.25rem' } }}
             >
               {step}
             </Typography>
@@ -72,7 +72,7 @@ function CardContent({ card }: { card: RecipeCardData }): JSX.Element {
             <Box sx={{ width: 5, height: 5, borderRadius: '50%', bgcolor: BRAND_COLORS.SOFT_GOLD, flexShrink: 0 }} />
             <Typography
               variant="body2"
-              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, fontSize: { xs: '1rem', md: '1.0625rem' } }}
+              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, fontSize: { xs: '1.125rem', md: '1.25rem' } }}
             >
               {item}
             </Typography>
@@ -92,7 +92,7 @@ function CardContent({ card }: { card: RecipeCardData }): JSX.Element {
             />
             <Typography
               variant="body2"
-              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.7, fontSize: { xs: '1rem', md: '1.0625rem' } }}
+              sx={{ color: BRAND_COLORS.DEEP_GRAPHITE, fontWeight: 400, lineHeight: 1.7, fontSize: { xs: '1.125rem', md: '1.25rem' } }}
             >
               {item}
             </Typography>
@@ -251,7 +251,7 @@ export function PinkOyster65Page(): JSX.Element {
                       <Box sx={{ mb: 2.5 }}>
                         <Typography
                           variant="overline"
-                          sx={{ color: BRAND_COLORS.SOFT_GOLD, letterSpacing: '0.14em', display: 'block', mb: 0.25, fontSize: '0.75rem' }}
+                          sx={{ color: BRAND_COLORS.SOFT_GOLD, letterSpacing: '0.14em', display: 'block', mb: 0.25, fontSize: '0.85rem' }}
                         >
                           {String(i + 1).padStart(2, '0')} of {totalCards}
                         </Typography>
@@ -262,7 +262,7 @@ export function PinkOyster65Page(): JSX.Element {
                             fontFamily: RECIPE_BOOK_FONT,
                             fontWeight: 400,
                             lineHeight: 1.2,
-                            fontSize: { xs: '1.375rem', md: '1.5rem' },
+                            fontSize: { xs: '1.5rem', md: '1.625rem' },
                           }}
                         >
                           {card.title}
