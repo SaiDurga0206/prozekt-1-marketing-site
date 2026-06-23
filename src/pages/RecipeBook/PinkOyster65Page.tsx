@@ -277,16 +277,7 @@ export function PinkOyster65Page(): JSX.Element {
                           {card.title}
                         </Typography>
                       </Box>
-                      <Box
-                        sx={{
-                          maxHeight: { xs: 300, md: 'none' },
-                          overflowY: 'auto',
-                          touchAction: 'pan-y',
-                          '&::-webkit-scrollbar': { width: 3 },
-                          '&::-webkit-scrollbar-thumb': { bgcolor: alpha(BRAND_COLORS.STEEL, 0.30), borderRadius: 4 },
-                          pr: { xs: 0.5, md: 0 },
-                        }}
-                      >
+                      <Box>
                         <CardContent card={card} />
                       </Box>
                     </Box>
@@ -303,8 +294,8 @@ export function PinkOyster65Page(): JSX.Element {
             size="small"
             sx={{
               position: 'absolute',
-              left: { xs: 10, md: 14 },
-              top: { xs: 120, md: 160 },
+              left: { xs: '10px', md: '14px' },
+              top: { xs: '120px', md: '160px' },
               transform: 'translateY(-50%)',
               bgcolor: 'rgba(255,255,255,0.88)',
               color: BRAND_COLORS.DEEP_GRAPHITE,
@@ -324,8 +315,8 @@ export function PinkOyster65Page(): JSX.Element {
             size="small"
             sx={{
               position: 'absolute',
-              right: { xs: 10, md: 14 },
-              top: { xs: 120, md: 160 },
+              right: { xs: '10px', md: '14px' },
+              top: { xs: '120px', md: '160px' },
               transform: 'translateY(-50%)',
               bgcolor: 'rgba(255,255,255,0.88)',
               color: BRAND_COLORS.DEEP_GRAPHITE,
