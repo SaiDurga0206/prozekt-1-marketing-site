@@ -129,6 +129,8 @@ export function PinkOyster65Page(): JSX.Element {
     let dragging = false
 
     const onDown = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      e.preventDefault() // blocks native image-drag and text-selection on desktop
       startX = e.clientX
       startY = e.clientY
       dragging = true
@@ -152,16 +154,19 @@ export function PinkOyster65Page(): JSX.Element {
     }
 
     const onCancel = () => { dragging = false }
+    const onDragStart = (e: DragEvent) => e.preventDefault()
 
     el.addEventListener('pointerdown', onDown)
     el.addEventListener('pointermove', onMove, { passive: false })
     el.addEventListener('pointerup', onUp)
     el.addEventListener('pointercancel', onCancel)
+    el.addEventListener('dragstart', onDragStart)
     return () => {
       el.removeEventListener('pointerdown', onDown)
       el.removeEventListener('pointermove', onMove)
       el.removeEventListener('pointerup', onUp)
       el.removeEventListener('pointercancel', onCancel)
+      el.removeEventListener('dragstart', onDragStart)
     }
   }, [totalCards])
 
@@ -211,6 +216,8 @@ export function PinkOyster65Page(): JSX.Element {
         </Box>
 
         <Box sx={{ '& .MuiTypography-root': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
+          {/* Wrapper gives arrows a positioning context outside overflow:hidden */}
+          <Box sx={{ position: 'relative' }}>
           {/* Carousel viewport — ref used for native touch listeners */}
           <Box ref={carouselRef} sx={{ overflow: 'hidden', borderRadius: 2, userSelect: 'none', touchAction: 'pan-y', cursor: 'grab', '&:active': { cursor: 'grabbing' } }}>
             {/* Track: totalCards×100% wide; each card is slidePercent% = exactly 1 viewport width */}
@@ -236,6 +243,7 @@ export function PinkOyster65Page(): JSX.Element {
                     {card.imageSrc && (
                       <Box
                         component="img"
+                        draggable={false}
                         src={card.imageSrc}
                         alt={card.imageAlt ?? card.title}
                         sx={{
@@ -272,6 +280,7 @@ export function PinkOyster65Page(): JSX.Element {
                         sx={{
                           maxHeight: { xs: 300, md: 'none' },
                           overflowY: 'auto',
+                          touchAction: 'pan-y',
                           '&::-webkit-scrollbar': { width: 3 },
                           '&::-webkit-scrollbar-thumb': { bgcolor: alpha(BRAND_COLORS.STEEL, 0.30), borderRadius: 4 },
                           pr: { xs: 0.5, md: 0 },
@@ -286,48 +295,65 @@ export function PinkOyster65Page(): JSX.Element {
             </Box>
           </Box>
 
-          {/* Navigation dots + arrows */}
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mt: 3 }}>
-            <IconButton
-              onClick={() => goTo(activeCard - 1)}
-              disabled={activeCard === 0}
-              size="small"
-              sx={{
-                color: BRAND_COLORS.STEEL,
-                border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.25)}`,
-                '&:not(:disabled):hover': { borderColor: BRAND_COLORS.SOFT_GOLD, color: BRAND_COLORS.SOFT_GOLD },
-              }}
-            >
-              <ChevronLeftIcon fontSize="small" />
-            </IconButton>
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-              {recipe.cards.map((_, i) => (
-                <Box
-                  key={i}
-                  onClick={() => goTo(i)}
-                  sx={{
-                    width: activeCard === i ? 20 : 8,
-                    height: 8,
-                    borderRadius: 4,
-                    bgcolor: activeCard === i ? BRAND_COLORS.SOFT_GOLD : alpha(BRAND_COLORS.STEEL, 0.35),
-                    cursor: 'pointer',
-                    transition: 'all 0.25s ease',
-                  }}
-                />
-              ))}
-            </Box>
-            <IconButton
-              onClick={() => goTo(activeCard + 1)}
-              disabled={activeCard === totalCards - 1}
-              size="small"
-              sx={{
-                color: BRAND_COLORS.STEEL,
-                border: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.25)}`,
-                '&:not(:disabled):hover': { borderColor: BRAND_COLORS.SOFT_GOLD, color: BRAND_COLORS.SOFT_GOLD },
-              }}
-            >
-              <ChevronRightIcon fontSize="small" />
-            </IconButton>
+          {/* Left arrow — overlaid on image, vertically centred */}
+          <IconButton
+            onClick={() => goTo(activeCard - 1)}
+            disabled={activeCard === 0}
+            size="small"
+            sx={{
+              position: 'absolute',
+              left: { xs: 10, md: 14 },
+              top: { xs: 120, md: 160 },
+              transform: 'translateY(-50%)',
+              bgcolor: 'rgba(255,255,255,0.88)',
+              color: BRAND_COLORS.DEEP_GRAPHITE,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              zIndex: 2,
+              '&:hover': { bgcolor: 'rgba(255,255,255,1)' },
+              '&.Mui-disabled': { visibility: 'hidden' },
+            }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+
+          {/* Right arrow — overlaid on image, vertically centred */}
+          <IconButton
+            onClick={() => goTo(activeCard + 1)}
+            disabled={activeCard === totalCards - 1}
+            size="small"
+            sx={{
+              position: 'absolute',
+              right: { xs: 10, md: 14 },
+              top: { xs: 120, md: 160 },
+              transform: 'translateY(-50%)',
+              bgcolor: 'rgba(255,255,255,0.88)',
+              color: BRAND_COLORS.DEEP_GRAPHITE,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              zIndex: 2,
+              '&:hover': { bgcolor: 'rgba(255,255,255,1)' },
+              '&.Mui-disabled': { visibility: 'hidden' },
+            }}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+          </Box>
+
+          {/* Dot indicators */}
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 3 }}>
+            {recipe.cards.map((_, i) => (
+              <Box
+                key={i}
+                onClick={() => goTo(i)}
+                sx={{
+                  width: activeCard === i ? 20 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  bgcolor: activeCard === i ? BRAND_COLORS.SOFT_GOLD : alpha(BRAND_COLORS.STEEL, 0.35),
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                }}
+              />
+            ))}
           </Box>
           {activeCard === 0 && (
             <Typography
