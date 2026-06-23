@@ -130,7 +130,8 @@ export function PinkOyster65Page(): JSX.Element {
 
     const onDown = (e: PointerEvent) => {
       if (e.pointerType === 'mouse' && e.button !== 0) return
-      e.preventDefault() // blocks native image-drag and text-selection on desktop
+      // Only preventDefault on mouse — on touch it causes pointercancel on iOS Safari
+      if (e.pointerType === 'mouse') e.preventDefault()
       startX = e.clientX
       startY = e.clientY
       dragging = true
