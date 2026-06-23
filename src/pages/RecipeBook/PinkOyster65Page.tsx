@@ -117,40 +117,51 @@ export function PinkOyster65Page(): JSX.Element {
     [totalCards],
   )
 
-  // Native touch listeners so we can call preventDefault on horizontal swipes
-  // before the inner overflowY:auto element claims them.
+  // Pointer events work for both mouse (desktop drag) and touch (mobile swipe).
+  // pointermove with passive:false lets us preventDefault on horizontal gestures
+  // before the inner overflowY:auto element claims the touch scroll.
   useEffect(() => {
     const el = carouselRef.current
     if (!el) return
 
     let startX = 0
     let startY = 0
+    let dragging = false
 
-    const onStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX
-      startY = e.touches[0].clientY
+    const onDown = (e: PointerEvent) => {
+      startX = e.clientX
+      startY = e.clientY
+      dragging = true
+      el.setPointerCapture(e.pointerId)
     }
 
-    const onMove = (e: TouchEvent) => {
-      const dx = e.touches[0].clientX - startX
-      const dy = e.touches[0].clientY - startY
+    const onMove = (e: PointerEvent) => {
+      if (!dragging) return
+      const dx = e.clientX - startX
+      const dy = e.clientY - startY
       if (Math.abs(dx) > Math.abs(dy)) e.preventDefault()
     }
 
-    const onEnd = (e: TouchEvent) => {
-      const dx = e.changedTouches[0].clientX - startX
+    const onUp = (e: PointerEvent) => {
+      if (!dragging) return
+      dragging = false
+      const dx = e.clientX - startX
       if (Math.abs(dx) > 50) {
-        setActiveCard(Math.max(0, Math.min(activeCardRef.current + (dx > 0 ? 1 : -1), totalCards - 1)))
+        setActiveCard(Math.max(0, Math.min(activeCardRef.current + (dx < 0 ? 1 : -1), totalCards - 1)))
       }
     }
 
-    el.addEventListener('touchstart', onStart, { passive: true })
-    el.addEventListener('touchmove', onMove, { passive: false })
-    el.addEventListener('touchend', onEnd, { passive: true })
+    const onCancel = () => { dragging = false }
+
+    el.addEventListener('pointerdown', onDown)
+    el.addEventListener('pointermove', onMove, { passive: false })
+    el.addEventListener('pointerup', onUp)
+    el.addEventListener('pointercancel', onCancel)
     return () => {
-      el.removeEventListener('touchstart', onStart)
-      el.removeEventListener('touchmove', onMove)
-      el.removeEventListener('touchend', onEnd)
+      el.removeEventListener('pointerdown', onDown)
+      el.removeEventListener('pointermove', onMove)
+      el.removeEventListener('pointerup', onUp)
+      el.removeEventListener('pointercancel', onCancel)
     }
   }, [totalCards])
 
@@ -201,7 +212,7 @@ export function PinkOyster65Page(): JSX.Element {
 
         <Box sx={{ '& .MuiTypography-root': { fontFamily: `${RECIPE_BOOK_FONT} !important` } }}>
           {/* Carousel viewport — ref used for native touch listeners */}
-          <Box ref={carouselRef} sx={{ overflow: 'hidden', borderRadius: 2, userSelect: 'none' }}>
+          <Box ref={carouselRef} sx={{ overflow: 'hidden', borderRadius: 2, userSelect: 'none', touchAction: 'pan-y', cursor: 'grab', '&:active': { cursor: 'grabbing' } }}>
             {/* Track: totalCards×100% wide; each card is slidePercent% = exactly 1 viewport width */}
             <Box
               sx={{
