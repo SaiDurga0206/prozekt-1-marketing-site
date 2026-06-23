@@ -1,4 +1,4 @@
-import nutritionImage from './Quick Snacks/Pink Oyster 65/nutritionbenifitsimage.jpg'
+import nutritionImage from './Quick Snacks/Pink Oyster 65/nutritionbenefitsimage.jpeg'
 import ingredientsImage from './Quick Snacks/Pink Oyster 65/pinkoysteringredientsimage.jpg'
 import makingProcessImage from './Quick Snacks/Pink Oyster 65/pinkoystermakingprocessimage.jpg'
 import servingImage from './Quick Snacks/Pink Oyster 65/servingpinkoysterimage.jpg'
