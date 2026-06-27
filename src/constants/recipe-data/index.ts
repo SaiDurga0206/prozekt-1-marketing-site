@@ -1,0 +1,7 @@
+export { MUSHROOM_RECIPES } from './mushroom-recipes'
+export { QUICK_SNACK_RECIPES } from './quick-snacks'
+export { MICROGREEN_RECIPES } from './microgreen-recipes'
+export { EVERYDAY_MEAL_RECIPES } from './everyday-meals'
+export { HEALTHY_PLATE_RECIPES } from './healthy-plates'
+export { READY_MEAL_BOX_RECIPES } from './ready-meal-boxes'
+export { CATERING_RECIPES } from './catering-recipes'

@@ -11,7 +11,10 @@ export const ROUTES = {
   FUNCTIONAL_FOODS: '/organics/functional-foods',
   CONTACT: '/contact',
   RECIPE_BOOK: '/recipe-book',
+  RECIPE_DETAIL: '/recipe-book/:recipeId',
   PINK_OYSTER_65: '/recipe-book/pink-oyster-65',
+  MILKY_MUSHROOM_MASALA_CURRY: '/recipe-book/milky-mushroom-masala-curry',
+  MILKY_MUSHROOM_GHEE_ROAST: '/recipe-book/milky-mushroom-ghee-roast',
 } as const
 
 export const HOME_HASH = {

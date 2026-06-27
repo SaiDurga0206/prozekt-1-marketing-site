@@ -20,7 +20,12 @@ import { ROUTES } from '@/routes'
 import type { RecipeData } from '@/types'
 
 function RecipeCard({ recipe }: { recipe: RecipeData }): JSX.Element {
-  const detailRoute = ROUTES[recipe.id === 'pink-oyster-65' ? 'PINK_OYSTER_65' : 'RECIPE_BOOK']
+  const legacyRouteMap: Record<string, string> = {
+    'pink-oyster-65': ROUTES.PINK_OYSTER_65,
+    'milky-mushroom-masala-curry': ROUTES.MILKY_MUSHROOM_MASALA_CURRY,
+    'milky-mushroom-ghee-roast': ROUTES.MILKY_MUSHROOM_GHEE_ROAST,
+  }
+  const detailRoute = legacyRouteMap[recipe.id] ?? `/recipe-book/${recipe.id}`
 
   return (
     <Box
@@ -40,17 +45,38 @@ function RecipeCard({ recipe }: { recipe: RecipeData }): JSX.Element {
         },
       }}
     >
-      <Box
-        component="img"
-        src={recipe.thumbnailSrc}
-        alt={recipe.title}
-        sx={{
-          width: '100%',
-          height: { xs: 200, md: 220 },
-          objectFit: 'cover',
-          display: 'block',
-        }}
-      />
+      {recipe.thumbnailSrc ? (
+        <Box
+          component="img"
+          src={recipe.thumbnailSrc}
+          alt={recipe.title}
+          sx={{
+            width: '100%',
+            height: { xs: 200, md: 220 },
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
+      ) : (
+        <Box
+          sx={{
+            width: '100%',
+            height: { xs: 120, md: 140 },
+            bgcolor: alpha(BRAND_COLORS.BONE_WHITE, 0.8),
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderBottom: `1px solid ${alpha(BRAND_COLORS.STEEL, 0.1)}`,
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{ color: alpha(BRAND_COLORS.STEEL, 0.5), letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: '0.65rem' }}
+          >
+            Image coming soon
+          </Typography>
+        </Box>
+      )}
       <Box sx={{ p: { xs: 2.5, md: 3 } }}>
         <Typography
           variant="overline"

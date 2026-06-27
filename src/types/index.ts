@@ -1,4 +1,4 @@
-export type { RecipeCardData, RecipeData, RecipeCardType } from './recipe.types'
+export type { RecipeCardData, RecipeData, RecipeCardType, NutritionTableRow, NutritionProfile } from './recipe.types'
 export type { NavItem } from './brand.types'
 export type { DivisionData } from './division.types'
 export type { ComponentSize } from './ui.types'

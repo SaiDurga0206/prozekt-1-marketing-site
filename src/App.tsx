@@ -7,7 +7,7 @@ import { ContactPage } from '@/pages/Contact'
 import { HomePage } from '@/pages/Home'
 import { LaunchingSoonPage } from '@/pages/LaunchingPage'
 import { OrganicsPage, MushroomsPage, PoultryPage } from '@/pages/Organics PVT LTD'
-import { RecipeBookPage, PinkOyster65Page } from '@/pages/RecipeBook'
+import { MilkyMushroomGheeRoastPage, MilkyMushroomMasalaCurryPage, PinkOyster65Page, RecipeBookPage, RecipeDetailPage } from '@/pages/RecipeBook'
 import { RecyclingPage } from '@/pages/Recycling&Repurposing'
 import { SustainabilityPage } from '@/pages/Sustainability Systems'
 import { ROUTES } from '@/routes'
@@ -28,7 +28,10 @@ function App(): JSX.Element {
         <Route path={ROUTES.HYDRO_AERO} element={<LaunchingSoonPage title="Hydro / Aeroponics" />} />
         <Route path={ROUTES.FUNCTIONAL_FOODS} element={<LaunchingSoonPage title="Functional Foods" />} />
         <Route path={ROUTES.RECIPE_BOOK} element={<RecipeBookPage />} />
+        <Route path={ROUTES.RECIPE_DETAIL} element={<RecipeDetailPage />} />
         <Route path={ROUTES.PINK_OYSTER_65} element={<PinkOyster65Page />} />
+        <Route path={ROUTES.MILKY_MUSHROOM_MASALA_CURRY} element={<MilkyMushroomMasalaCurryPage />} />
+        <Route path={ROUTES.MILKY_MUSHROOM_GHEE_ROAST} element={<MilkyMushroomGheeRoastPage />} />
         <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>

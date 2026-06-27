@@ -1,2 +1,5 @@
 export { RecipeBookPage } from './RecipeBookPage'
+export { RecipeDetailPage } from './RecipeDetailPage'
 export { PinkOyster65Page } from './PinkOyster65Page'
+export { MilkyMushroomMasalaCurryPage } from './MilkyMushroomMasalaCurryPage'
+export { MilkyMushroomGheeRoastPage } from './MilkyMushroomGheeRoastPage'
